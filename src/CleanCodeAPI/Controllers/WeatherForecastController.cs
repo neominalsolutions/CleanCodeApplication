@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanCodeAPI.Controllers
@@ -19,6 +20,7 @@ namespace CleanCodeAPI.Controllers
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
+    [Authorize(Roles = "Admin")]
     public IEnumerable<WeatherForecast> Get()
     {
       Console.WriteLine("WeatherForecast");
