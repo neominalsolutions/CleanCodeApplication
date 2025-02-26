@@ -11,9 +11,16 @@ using System.Threading.Tasks;
 namespace Domain.Services
 {
   // [LogPerformace("Deneme")]
+  // IAccountService interface postunun adapter ise AccountService sınıftır.
   public class AccountService : IAccountService
   {
-    
+
+    private readonly IAccountRepository _accountRepository; // DIP
+
+    public AccountService(IAccountRepository accountRepository)
+    {
+      _accountRepository = accountRepository;
+    }
 
     // [LogPerformace] // Attribute
     [LogPerformace("Deneme")]
@@ -21,7 +28,7 @@ namespace Domain.Services
     {
       // var sp = Stopwatch.StartNew(); // cross cutting concern
       Console.Out.WriteLine("Para çekme işlemi");
-      Thread.Sleep(5000);
+      // Thread.Sleep(5000);
       // sp.Stop();
 
       //var sqlProvider = new MsSqlDbProvider();
@@ -35,6 +42,8 @@ namespace Domain.Services
 
       //var dbProviderAdapter2 = new DbProviderAdapter("POSTGRESQL");
       //dbProviderAdapter.ExecuteSql("UPDATE ...");
+
+      this._accountRepository.Save();
 
 
     }

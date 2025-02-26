@@ -1,3 +1,4 @@
+using Application.Services;
 using Aspect.Core;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -18,10 +19,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //builder.Services.AddScoped<LogPerformaceAspect>();
-//builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IDrawMoneyService, DrawMoneyService>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+
 
 // 1.destek
 builder.Services.AddScoped<IRepository, MongoRepository>();
+
+
 
 // 2.destek daha dinamik durumlar için
 builder.Services.AddKeyedScoped<IRepository, MongoRepository>("mongo");
