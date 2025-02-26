@@ -5,6 +5,8 @@ using CleanCodeAPI.Middlwares;
 using Domain;
 using Domain.Contracts;
 using Domain.Services;
+using Infrastructure;
+using Infrastructure.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,14 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddScoped<LogPerformaceAspect>();
 //builder.Services.AddScoped<IAccountService, AccountService>();
+
+// 1.destek
+builder.Services.AddScoped<IRepository, MongoRepository>();
+
+// 2.destek daha dinamik durumlar için
+builder.Services.AddKeyedScoped<IRepository, MongoRepository>("mongo");
+builder.Services.AddKeyedScoped<IRepository, MsSqlRepository>("msSql");
+
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
 {
@@ -49,7 +59,7 @@ app.Use(async (context, next) =>
   Console.WriteLine("Response");
 });
 
-app.UseCustomException();
+//app.UseCustomException();
 
 app.MapControllers();
 

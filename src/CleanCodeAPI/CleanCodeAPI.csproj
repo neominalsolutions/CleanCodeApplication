@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Aspect.Core\Aspect.Core.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
